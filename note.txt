@@ -1,0 +1,216 @@
+node : 
+- note a programming language 
+- run time enviroment for the javascript to run outside the browser
+- having javascript libraries
+
+feature:
+---------
+-extreamly fast:
+    node is ready to accept multiple request at a time and resolve the incoming request where as other technolgy's like php ,.net only accept single request at a time.
+
+- asynchronus programming
+- single thraeded
+- highly scalable
+- open source
+- extension.js
+---------------------------------
+
+what is node.js module
+-------------------------
+- each files /javScript libraries inside a node.js
+- import keyword : require('module name') 
+- export keyword : module.exports/export
+
+types of modules
+-------------------
+ -custome modules
+ -native modules (built in)
+
+ built in modules
+ -----------------
+  - File System
+  ------------------
+   - allows you to work with the files
+   - syntax to import the file system:
+        require ('fs')
+
+    -common use :
+        Read files :fs.readFile()
+        delete files :fs.unlink()
+        update files :fs.writeFile()
+        rename files :fs.rename()
+        create files : fs.open()
+
+- Http Modules:
+-------------------
+- Allows node js to transfer data over http.
+- Syntax to import the http module:
+require('http')
+ it can create http server that listen to server port and gives response back to client
+        -createServer()
+        -listen(portnumber)
+
+- https Modules -
+
+- event modules -
+to generate events 
+    - class - eventEmitter()-> object-> new
+        -object.on() -to create
+        -object.emit() -to execute
+- crypto
+
+Backend Concept:
+-------------------------
+- client -server architecture -sending request and response b/w two application
+- api - application programming interface
+- restful api / architecture -http - json-
+- CRUD - CREATE - READ - UPDATE -DELETE
+- CORS - Cross Origin Resource Sharing
+
+Steps to create server:
+--------------------------------
+
+1) create a folder for server.
+2) install package.json. npm configuration-syntax : npm init -y
+3) update  package.json Script
+4) install
+        - express.js - framework of node.js -
+        install : npm i express
+        - cors - Cross Origin Resource Sharing
+        install : npm i cors
+        - dotenv - its a zero dependcy module that loads enviroment varible from dotenv files to process.env
+        enviroment varible: it provides information about the enviroment in which the process is running.
+        install : npm i dotenv
+        install in one command:
+        npm i express cors dotenv
+
+5) create .env module
+6) create .gitignore file and place node_modules and env file inside the gitignore.
+7) create index.js - to create server
+
+MVC architecture:
+----------------------
+view: send the requests
+Routing: using the differnt path to resolve the path name is called routing.
+Controller: controller is used to handle the incoming requests and send responses.
+model: it provide support to the stored database structure.
+database : and its being stored in database.
+
+mongodb
+---------------
+used to store data
+
+-command
+---------------
+- MONGOSH -mongodb shell
+
+1) show database :get all database inside your mongodb
+2) use db_name: to move into a particular database
+3) show collections: to check collection in the database
+4) db.collection_name.find(): to get all documents inside the particular collection
+5) db.collection_name.find({condtion}):to get all documents satsisying a particular condition inside a collection.
+6) db.collection_name.findOne({condtion}): to get the particular document from the particular collection.
+7) db.collection_name.find().limit(number): to get a particular number of documents from a collection
+8) db.collection_name.find().sort({condition:1}): to sort in ascending order
+9) db.collection_name.find().sort({condition:-1}): to sort in desecnding order
+- note: if the charactors in uppercase it will sort first and and then goes lower case.
+10) db.collection_name.insertOne({condition}): used to insert single new documents to the collection
+11) db.collection_name.insertMany([{Condition},{condition}]) :used to insert multiple new documents to the collection.
+
+note:
+MongoDb is a unstructed database if the syntax is correct it will be added to the documemts as a key value pair.its does note depends upon the structure where early documents where created.
+whereas the other database such as sql where supported the well structed table formula for storing the database.
+
+12) query based-
+        -db.users.find({age:{$lt:25}}) - less than
+        -db.users.find({age:{$lte:25}}) - less than or equal to
+        -db.users.find({age:{$gt:25}}) - greater than
+        -db.users.find({age:{$gte:25}}) - greater than or equal to
+        -db.users.find({$and:[{age:{$gt:30}},{age:{$lt:40}}]}) : both condition true
+        -db.users.find({$or:[{age:{$gt:30}},{age:{$lt:40}}]}) : one condition true
+        -db.users.find({$uname:{$exists:true}}) : Returns the documemts having key uname
+        -db.users.find({$uname:{$exists:false}}) : Returns the documemts that does not having key uname
+        -db.usres.find({$expr:{$lt:["$debt","$balence"]}})- to compare two keys within the document($expr)
+13) update-
+        -db.users.updateOne({uname:"jhon"},{$inc:{age:-3}}):
+        to increament postive value given
+        to decrement negative values given
+
+        -db.users.updateOne({uname:"romero"},{$push:{hobby:"cricket"}}):
+        update arry using push
+
+14) db.users.countDocuments() - to get the total number of document.
+
+15) Delete:
+        -db.users.deleteOne({name:"Ryan"}) : delete one documemts
+        -db.users.deleteMany({name:{$exists:true}}): delete more than one documents
+
+16) Aggergation operations process multiple documents and return computed results.
+    - Group values from multiple documents together
+
+    -syntax:
+    {
+   $lookup:
+     {
+       from: <collection to join>,
+       localField: <field from the input documents>,
+       foreignField: <field from the documents of the "from" collection>,
+       as: <output array field>
+     }
+}
+    db.users.aggregate({$lookup:{from:'projects',localField:'_id',foreignField:'userId',as:'userProjects'}})
+
+MongoDB Atlas:
+--------------------
+1) Create new Project
+2) Give Project name and click next
+3) Ownership permission default our own project selected and click create project
+4) Click databases in th side bar then click build a databse button
+5) Choose free option and then create databse button
+6) update the password - make it as simple as possible avoide special character.
+7) click create usre button
+8) click finis and go button to overview button
+9) click again databse in the sidebar
+10) click browse collection inorder to create collection
+11) click add my own data and add databse name and collection
+12) add database and collection name
+13) click network access
+14) click allow access from anywhere then click confirm button
+15) copy the connection string and project nam enad paste it in the .env file
+
+mongoose:
+------------
+- it is a node.js library used to connect server with the mongodb
+- install -npm i mongoose
+- import mongoose in the connection.js file 
+- access connectionString of mongodbfrom process.env 
+- connect server/node.js with database/mongodb using connect function in mongoose - returns a promise 
+- import connection.js file in index.js inorder to execute it 
+
+MODAL
+
+- used to create a structure to the collection of database 
+- modal method in mongoose is used to create modal 
+- inorder to create schema use Schema class in mongoose
+- inside schema we can use validator install: npm i validtaor
+
+JWT: Json Web Token
+----------------------
+it defines a compact and self contained way for securely transmitting information b/w parties has a json object
+
+
+differnce b/w section storage and local storage:
+-----------------------------
+when the item is stored in local storage the item will stored in the local storage will remove when the tab is closed or logout.while in section storage the item will be permentaly stored.
+
+multer:
+---------------------------
+.>multer is a node.js middleware for handling multipart/form-data (primarly used for uploading files)
+
+.> it can only resolve multipart/form-data
+
+.> it addes a body object and file object to the request object
+
+.> body object holdes value of the text field of the form
+
+.> file object contains the file uploaded via form.
