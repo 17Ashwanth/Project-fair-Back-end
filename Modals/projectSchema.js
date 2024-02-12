@@ -30,7 +30,8 @@ const projectSchema = mongoose.Schema({
     userId:{
         type: String,
         require:true
-    }
+    },
+    
 })
 
 //create modal
